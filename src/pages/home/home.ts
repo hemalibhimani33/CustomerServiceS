@@ -27,7 +27,7 @@ public shouldShowCancel: any = [];
   constructor(private http: Http,public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
     , public formBuilder: FormBuilder , public navParams: NavParams,public  restProvider: RestProvider , public modalCtrl: ModalController)
     {
-    debugger;
+
     //this.image = this.navParams.get('http://192.168.32.56:1337/service/view');
     //this.ionViewLoaded();
    // this.ionViewLoaded();
@@ -43,10 +43,10 @@ public shouldShowCancel: any = [];
   }
 
   loadPeople(){
-    debugger;
+
    this.restProvider.load()
    .then(data => {
-     debugger;
+
      this.people = data;
    });
  }
@@ -57,7 +57,7 @@ public shouldShowCancel: any = [];
  }
 
  getPeople(ev: any){
-   debugger;
+
    this.setFilteredItems();
    let val = ev.target.value;
 
@@ -94,7 +94,7 @@ public shouldShowCancel: any = [];
 
   //   console.log(list);
 
-  //   //debugger;
+  //   //
 
   //   //this.loadPeople();
   //  }
@@ -110,7 +110,7 @@ public shouldShowCancel: any = [];
 
 }
   public sub(id,service) {
-debugger;
+
     this.nav.push('FormPage' , {id : id, name: service});
  }
 

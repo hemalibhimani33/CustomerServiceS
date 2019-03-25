@@ -28,7 +28,7 @@ export class ContactPage {
   constructor(private cookieService:CookieService, public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
     , public formBuilder: FormBuilder , public navParams: NavParams,public  restProvider: RestProvider , public modalCtrl: ModalController)
     {
-      debugger;
+
 
 
 
@@ -59,7 +59,7 @@ export class ContactPage {
     // console.log(this.data);
     // this.auth.delete('token');
     //     console.log(this.data);
-    debugger;
+
     this.data = this.auth.getCookie("token");
     this.auth.setCookie('token',this.data,-1);    //localStorage.removeItem("token");
    // this.data = this.auth.getCookie("token");
@@ -80,7 +80,7 @@ export class ContactPage {
 // }
 
      public loginn(): any{
-      debugger;
+
   //  this.clicked = true;
       this.nav.push(LoginPage);
      console.log( localStorage.getItem('clicked'));

@@ -20,7 +20,7 @@ export class User {
 @Injectable()
 export class AuthService {
   currentUser: User;
-  debugger;
+
   constructor(public httpClient:HttpClient, public http: HttpClient, private cookieService: CookieService) {
 
 
@@ -42,7 +42,7 @@ export class AuthService {
         c = c.substring(1);
       }
       if (c.indexOf(name) == 0) {
-        debugger;
+
         return c.substring(name.length, c.length);
       }
     }

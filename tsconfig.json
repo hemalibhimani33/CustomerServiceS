@@ -1,14 +1,16 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": { "*": ["types/*"] },
     "allowSyntheticDefaultImports": true,
     "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     //"types" : ["node", "lodash", "sails"]
     "lib": [
-      "es2015",
-      "dom"
 
+      "dom",
+      "es2015"
     ],
     "module": "es2015",
     "moduleResolution": "node",
@@ -17,6 +19,7 @@
     //"types" : ["node", "lodash", "sails"]
   },
   "include": [
+    "./node_modules/@types",
     "src/**/*.ts"
   ],
   "exclude": [

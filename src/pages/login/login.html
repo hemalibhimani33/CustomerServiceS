@@ -57,7 +57,7 @@
 
           <button ion-button id="button" (click)="login()" full><b>Login</b></button>
 
-          <button ion-button id="button2"color="primary" (click)="createAccount()" icon-only clear>Not a member? Register</button>
+          <button ion-button id="button2" font-color="light" (click)="createAccount()" icon-only clear>Not a member? Register</button>
         </ion-col>
       </ion-row>
     <!--
@@ -69,6 +69,6 @@
       </ion-row>
     -->
     </form>
-    <ion-spinner name="circles" *ngIf="put" ></ion-spinner>
+    <ion-spinner name="circles" *ngIf="put" id="spinr"></ion-spinner>
   </div>
 </ion-content>

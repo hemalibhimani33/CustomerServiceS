@@ -13,7 +13,7 @@ import { ModalController, Platform, NavParams, ViewController } from 'ionic-angu
   templateUrl: 'form.html',
 })
 export class FormPage {
-  //debugger;
+  //
  // name:any;
  public people2 : any;
  public id: any = {};
@@ -26,19 +26,20 @@ public data: any = {};
   constructor(public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
     , public formBuilder: FormBuilder , public navParams: NavParams,public  restProvider: RestProvider , public modalCtrl: ModalController
   ) {
-    debugger;
+
     this.id = navParams.get('id');
     this.service = navParams.get('name');
     console.log(this.service);
 
-    debugger;
+
     this.loadPeople2();
   }
 
-orderService(){
+orderService(category){
   this.data = this.auth.getCookie("token");
   if(this.data != ""){
-    this.nav.push('ServicePage');
+    this.nav.push('ServicePage', {name: category});
+
   }else{
     this.showPopup("failure", "login requires for order service");
   }
@@ -47,10 +48,10 @@ orderService(){
 
 
   loadPeople2(){
-    debugger;
+
    this.restProvider.load2(this.id)
    .then(data => {
-     debugger;
+
      this.people2 = data;
    });
  }
@@ -60,7 +61,7 @@ orderService(){
      ev.stopPropagation();
  }
  get(ev: any){
-  debugger;
+
   this.setFilteredItems2();
   let val = ev.target.value;
 

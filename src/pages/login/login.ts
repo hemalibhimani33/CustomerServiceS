@@ -43,7 +43,7 @@ constructor(private ng4LoadingSpinnerService:Ng4LoadingSpinnerService,public nav
 
 ) {
 
- // debugger;
+ //
   this.MyForm = this.formBuilder.group({
 
 
@@ -96,11 +96,11 @@ login(event){
     else {
       this.createSuccess = true;
      // this.showPopup("Success", "login.");
-      debugger;
+
 
   const email = this.MyForm.controls.p_email.value
   const password = this.MyForm.controls.p_password.value
-  debugger;
+
    this.restProvider.LoginUser(email, password)
    .subscribe(
     data => {
@@ -108,11 +108,11 @@ login(event){
       console.log(data.token);
 
      this.auth.setCookie('token',data.token,1);
-    // debugger;
+    //
     this.data = this.auth.getCookie("token");
      // this.cookieService.set('token',JSON.stringify(this.mydata));
 
-      debugger;
+
        //this.loggedIn.next(true);
     if(this.data != ""){
 
@@ -136,7 +136,7 @@ login(event){
 
     error =>  {
      console.log(error);
-    // debugger;
+    //
      //this.loggedIn.next(true);
     // this.clicked = true;
      this.showPopup("failure", "invalid information");}
@@ -148,7 +148,7 @@ login(event){
 
 
 
-      debugger;
+
      // this.nav.push('ServicePage');
 
     }

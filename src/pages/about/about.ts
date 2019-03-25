@@ -30,7 +30,7 @@ export class AboutPage {
 }
 
   public logout(): any{
-    debugger;
+
     this.cookieService.delete('token');
     this.loggedIn.next(false);
     this.navCtrl.push(LoginPage);

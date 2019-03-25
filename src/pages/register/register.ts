@@ -83,7 +83,6 @@ isMatching(group: FormGroup){
   } else{
     return null;
   }
-
 }
 
 matchPassword(group): any {
@@ -110,7 +109,7 @@ console.log("sdfdsf");
 
 register(){
   this.createSuccess = true;
-  debugger;
+
 
   if(!this.myForm.valid){
     this.createSuccess = false ;
@@ -121,17 +120,12 @@ register(){
     }else{
       this.showPopup("failure","enter valid information");
     }
-
   }
   else {
     this.createSuccess = true;
-    debugger;
-    this.restProvider.RegisterUser(this.myForm.controls.p_surname.value,this.myForm.controls.p_lastname.value,this.myForm.controls.p_email.value,this.myForm.controls.p_password.value,this.myForm.controls.p_number.value)
-
-   debugger;
+    this.restProvider.RegisterUser(this.myForm.controls.p_surname.value,this.myForm.controls.p_lastname.value,this.myForm.controls.p_email.value,this.myForm.controls.p_password.value,this.myForm.controls.p_number.value);
     this.showPopup("Success", "Account created.");
    // this.nav.push('LoginPage');
-
    console.log(this.myForm.value);
     console.log(this.formdata);
   }
