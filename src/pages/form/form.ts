@@ -38,6 +38,7 @@ public data: any = {};
 orderService(category){
   this.data = this.auth.getCookie("token");
   if(this.data != ""){
+    debugger;
     this.nav.push('ServicePage', {name: category});
 
   }else{
