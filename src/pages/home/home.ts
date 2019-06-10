@@ -1,6 +1,5 @@
 //import { FormPage } from './../form/form';
 import { Component } from '@angular/core';
-
 import { FormPage } from '../../pages/form/form';
 import { AlertController, IonicPage, Loading, LoadingController, NavController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service/auth-service';
@@ -31,7 +30,7 @@ public shouldShowCancel: any = [];
     //this.image = this.navParams.get('http://192.168.32.56:1337/service/view');
     //this.ionViewLoaded();
    // this.ionViewLoaded();
-   this.homePage = 'http://localhost:8100/';
+    this.homePage = 'http://localhost:8100/';
     this.loadPeople();
 
 
@@ -40,6 +39,21 @@ public shouldShowCancel: any = [];
     //   service : this.people.service
     // });
 
+  }
+
+  doRefresh(event) {
+    debugger;
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      this.restProvider.load()
+   .then(data => {
+     this.people = data;
+    event.complete();
+   });
+     // event.target.complete();
+    }, 1);
   }
 
   loadPeople(){
@@ -53,14 +67,19 @@ public shouldShowCancel: any = [];
  onClear(ev)
  {
      this.loadPeople();
-     ev.stopPropagation();
+    // ev.stopPropagation();
  }
 
  getPeople(ev: any){
-
+  //  debugger;
    this.setFilteredItems();
    let val = ev.target.value;
-
+   console.log("ev"+ev.data);
+   console.log("value"+val);
+    if(val=="")
+    {
+      this.onClear('');
+    }
    if (val && val.trim() != '') {
 
       //var list1:any = [];
@@ -71,7 +90,9 @@ public shouldShowCancel: any = [];
       }*/
 
     var list:any = this.people.filter((person) => {
-      return (person.service.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      debugger;
+      console.log(person.category);
+      return (person.category.toLowerCase().indexOf(val.toLowerCase()) > -1);
     });
     // var list2:any = this.people.filter((person2) => {
     //   return (person2.category.toLowerCase().indexOf(val.toLowerCase()) > -1);

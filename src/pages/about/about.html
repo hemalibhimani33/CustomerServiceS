@@ -6,6 +6,79 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-    <button ion-button id="button" color="dark" full><b>No Booking Found</b></button>
+
+
+<ion-content  class="mybooking " fullscreen=""  padding>
+  <div *ngIf="!booking" class="user-required-bg">
+    <button ion-button id="button" color="dark" (click)="forbooking()"  full><b>Login requires</b></button>
+   <!-- <div class="image">
+    <ion-img  src="../../assets/imgs/noBooking.png"></ion-img></div> -->
+    <!-- <ion-row class="logo">
+        <ion-col>
+          <img class="full-image" src="assets/imgs/booking.png"/>
+        </ion-col>
+      </ion-row> -->
+  </div>
+  <div *ngIf="booking" class="height-100">
+                  <div *ngIf="nobooking" class="no-booking-bg"></div>
+                  <!-- <ion-label *ngIf="nobooking" id="noBooking">No Booking Available</ion-label> -->
+                  <div *ngIf="!nobooking">
+                  <ion-item>
+                      <ion-label>Bookings</ion-label>
+                      <!-- <ion-select [(ngModel)]="courseValue" #red4 interface="action-sheet" placeholder="Select One"> -->
+                      <ion-select interface="action-sheet"  placeholder="Select One" (ionChange)="onContextChange($event)" >
+
+                        <ion-option value="ALL" selected>ALL</ion-option>
+                        <ion-option value="Pending">Pending</ion-option>
+                        <ion-option value="Rejected">Rejected</ion-option>
+                        <ion-option value="Accepted">Accepted</ion-option>
+                        <ion-option value="Completed">Completed</ion-option>
+                        <ion-option value="CanceledOrder">CanceledOrder</ion-option>
+                      </ion-select>
+                  </ion-item>
+
+                  <ion-item class="order" *ngFor="let person3 of people3">
+                      <ion-label>
+                           <!-- <h2><b>Beauty</b></h2> -->
+                            <!-- <h2>Salon AT home for women</h2> -->
+                            <h2><b>{{person3.category}}</b></h2>
+                            <h2>{{person3.service}}</h2>
+                            <h3 id = "status1">{{date1(person3.start_date)}} {{person3.start_time}}</h3>
+                            <!-- <h3  id = "status1">{{person3.start_date}} {{person3.start_time}}</h3> -->
+                            <!-- <h2 id = "status">{{person3.OrderStatus}}</h2> -->
+                            <div class="cust-item-footer">
+                              <b> <h2 id = "status1" *ngIf="person3.orderstatus == -1">Pending</h2></b>
+                              <b><h2 id = "status2" *ngIf="person3.orderstatus == 0">Accepted</h2></b>
+                              <b><h2 id = "status3" *ngIf="person3.orderstatus == 1">Rejected</h2></b>
+                              <b><h2 id = "status4" *ngIf="person3.orderstatus == 2">Completed</h2></b>
+                              <b><h2 id = "status5" *ngIf="person3.orderstatus == 3">CanceledOrder</h2></b>
+                              <!-- <h2 id = "status">{{eventFlag}}</h2> -->
+                                        <span
+                                        *ngIf="person3.orderstatus == -1"
+                                 float-right
+                                 ion-button
+                                 icon-left
+                                 (click)="cnl(person3)"
+                                 color="danger"
+                                 clear>
+                                 <ion-icon name="trash"></ion-icon> Order
+                              </span>
+
+                            </div>
+                        </ion-label>
+
+                        <!-- <ion-label>
+                            <span
+                     float-right
+                     ion-button
+                     icon-left
+                     color="danger"
+                     clear>
+                     <ion-icon name="close"></ion-icon>
+                     Cancel Order
+                  </span>
+                </ion-label> -->
+                  </ion-item>
+                  </div>
+  </div>
 </ion-content>

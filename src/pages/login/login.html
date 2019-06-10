@@ -4,15 +4,6 @@
     </ion-navbar>
 
   </ion-header>
-
-<!-- <ion-content class="login-content" padding>
-   <ion-row class="logo-row">
-    <ion-col></ion-col>
-    <ion-col width-300 height-50>
-      <img class="full-image" src="assets/imgs/fintech.jpg"/>
-    </ion-col>
-    <ion-col></ion-col>
-  </ion-row> -->
   <ion-content class="login-content" padding>
   <div class="login-box">
     <form  [formGroup]="MyForm" *ngIf="!put">
@@ -20,54 +11,71 @@
         <ion-col>
             <div class="title"><h1><b>Sign In</b></h1></div>
           <ion-list inset>
-
-            <!--<ion-item>
-              <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>
-            </ion-item>
-
-            <ion-item>
-              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
-            </ion-item>
-            -->
-
-          <ion-item>
+          <!-- <ion-item>
             <ion-label>
               <ion-icon name="mail"></ion-icon>
             </ion-label>
-            <ion-input placeholder="Email" type="email" [(ngModel)]="formdata.p_email" name="p_email" formControlName="p_email"></ion-input>
-            <!-- <div *ngIf="f.email.errors.required">Email is required</div> -->
-
-          </ion-item>
-
-          <!-- <ion-item *ngIf="!MyForm.controls.p_email.valid  && (createSuccess)">
-            <p>Please enter a valid Email address.</p>
+            <ion-input placeholder="Email" type="email"   formControlName="p_email"></ion-input>
           </ion-item> -->
 
+
+          <!-- <ion-item>
+            <ion-label>
+              <ion-icon name="mail"></ion-icon>
+            </ion-label>
+            <div class="form-group">
+            <ion-input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"></ion-input>
+            <div *ngIf="submitted && f.email.errors " class="invalid-feedback">
+              <div *ngIf="f.email.errors.required">Email is required</div>
+              <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+            </div>
+            </div>
+          </ion-item> -->
+          <!-- <div class="form-group"> -->
             <ion-item>
+            <ion-label>
+              <ion-icon name="mail"></ion-icon>
+            </ion-label>
+
+            <ion-input placeholder="Email" [(ngModel)]="formdata.p_email" name="p_email" type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"></ion-input>
+          </ion-item>
+            <!-- </div>` -->
+              <div *ngIf="submitted && f.email.errors " class="invalid-feedback">
+              <div *ngIf="f.email.errors.required">Email is required</div>
+              <div *ngIf="f.email.errors.pattern">Email must be a valid email address</div>
+              </div>
+
+          <!-- <div class="form-group"> -->
+          <ion-item>
+            <ion-label>
+              <ion-icon name="lock"></ion-icon>
+            </ion-label>
+               <ion-input placeholder="Password" type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"></ion-input>
+
+
+          </ion-item>
+        <!-- </div> -->
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Password is required</div>
+          <!-- <div *ngIf="f.password.errors.pattern">Password requires one lower case letter, one upper case letter, one digit, 6-13 length, and no spaces.</div> -->
+          </div>
+
+            <!-- <ion-item>
               <ion-label>
                 <ion-icon name="lock"></ion-icon>
               </ion-label>
-              <ion-input placeholder="Password" type="password" [(ngModel)]="formdata.p_password" name="p_password" formControlName="p_password"></ion-input>
-
-            </ion-item>
+                 <ion-input placeholder="Password" type="password" [(ngModel)]="formdata.p_password" name="p_password" formControlName="p_password"></ion-input>
+            </ion-item> -->
 
           </ion-list>
 
-          <!-- <button ion-button id="button1" icon-only clear>Forgot Password ?</button> -->
+          <button ion-button id="button1" (click)="resetPassword()" icon-only clear>Forgot Password ?</button>
 
           <button ion-button id="button" (click)="login()" full><b>Login</b></button>
 
           <button ion-button id="button2" font-color="light" (click)="createAccount()" icon-only clear>Not a member? Register</button>
         </ion-col>
       </ion-row>
-    <!--
-      <ion-row>
-        <ion-col class="signup-col">
-          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Login</button>
-          <button ion-button class="register-btn" block clear (click)="createAccount()">Create New Account</button>
-        </ion-col>
-      </ion-row>
-    -->
     </form>
     <ion-spinner name="circles" *ngIf="put" id="spinr"></ion-spinner>
   </div>

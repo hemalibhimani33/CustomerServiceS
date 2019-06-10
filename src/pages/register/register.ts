@@ -14,17 +14,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
   templateUrl: 'register.html',
 })
 
-// export class UserInfo {
-//   username: string;
-//   email: string;
-//   number: number;
-//   password: string;
-// }
-
-
 export class RegisterPage {
-
-
 
  formdata = {
   p_surname: '',
@@ -35,41 +25,26 @@ export class RegisterPage {
   p_confirm_password: ''
 };
 
-//u = new UserInfo();
 myForm: FormGroup;
-//apiUrl = '192.168.32.56:1337/register';
-
 
 createSuccess: Boolean = false;
 constructor(public nav: NavController , private auth: AuthService, private alertCtrl: AlertController
   , public formBuilder: FormBuilder , public  restProvider: RestProvider , private httpClient:HttpClient
 ) {
-
   this.myForm = this.formBuilder.group({
-    p_surname: ['', Validators.compose([Validators.maxLength(30),Validators.required])],
-    p_lastname: ['', Validators.compose([Validators.maxLength(30),Validators.required])],
-
-
-    p_email: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
-    //password_ctrl: this.formBuilder.group({
-     p_number: ['', Validators.compose([Validators.required])],
-      p_password: ['', [Validators.required, Validators.minLength(6)]],
+      p_surname: ['', Validators.compose([Validators.maxLength(30),Validators.required])],
+      p_lastname: ['', Validators.compose([Validators.maxLength(30),Validators.required])],
+      // p_email: ['', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])],
+      p_email: ['', Validators.compose([Validators.required, Validators.pattern(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,10})$/)])],
+      p_number: ['', Validators.compose([Validators.required,Validators.pattern('^[0-9]{10}$')])],
+      // p_password: ['', [Validators.required, Validators.minLength(6)]],
+      p_password: ['', Validators.compose([Validators.required,Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{4,8}$/)])],
       p_confirm_password: ['', Validators.compose([Validators.required])]
-    //}, this.matchPassword)
-
   }, {'validator': this.isMatching});
- //   this.restProvider.ValidateUser(this.myForm.controls.p_username.value,this.myForm.controls.p_email.value,this.myForm.controls.p_number.value,this.myForm.controls.p_password.value)
-
-    //this.products = products;
-
 }
 
 ionViewDidEnter(){
-
 }
-
-
-
 
 isMatching(group: FormGroup){
 
@@ -108,26 +83,50 @@ console.log("sdfdsf");
 }
 
 register(){
-  this.createSuccess = true;
-
-
+  //this.createSuccess = true;
   if(!this.myForm.valid){
-    this.createSuccess = false ;
-    if(!this.myForm.controls.p_email.valid){
+    //this.createSuccess = false ;
+    if(!this.myForm.controls.p_surname.valid){
+      this.showPopup("failure", "Enter Valid firstname information.");
+    }else if(!this.myForm.controls.p_lastname.valid){
+      this.showPopup("failure", "Enter Valid lastname information.");
+    }else if(!this.myForm.controls.p_email.valid){
       this.showPopup("failure", "Enter Valid email address.");
-    }else if(this.myForm.controls.p_surname.valid){
-      this.showPopup("failure", "Enter Valid username information.");
+    }else if(!this.myForm.controls.p_password.valid){
+      this.showPopup("failure", "Password requires one lower case letter, one upper case letter, one digit, 4-8 length, and no spaces,no special character.");
+    }else if(!this.myForm.controls.p_number.valid){
+      this.showPopup("failure", "Enter 10 digit mobile number.");
     }else{
       this.showPopup("failure","enter valid information");
     }
   }
   else {
-    this.createSuccess = true;
-    this.restProvider.RegisterUser(this.myForm.controls.p_surname.value,this.myForm.controls.p_lastname.value,this.myForm.controls.p_email.value,this.myForm.controls.p_password.value,this.myForm.controls.p_number.value);
-    this.showPopup("Success", "Account created.");
-   // this.nav.push('LoginPage');
-   console.log(this.myForm.value);
-    console.log(this.formdata);
+   // this.createSuccess = true;
+   debugger;
+   console.log(this.myForm.controls.p_surname.value);
+   var user =	{
+      "firstname":this.myForm.controls.p_surname.value,
+      "lastname":this.myForm.controls.p_lastname.value,
+      "email":this.myForm.controls.p_email.value ,
+      "password":this.myForm.controls.p_password.value ,
+      "mobile":this.myForm.controls.p_number.value
+   };
+    this.restProvider.RegisterUser(user)
+      .subscribe(data => {
+        debugger;
+        console.log(data);
+        this.showPopup1("Success", "Account created.");
+
+      }, error => {
+        debugger;
+      console.log(error);
+      this.showPopup("failure", "already exist");
+      // Error getting the data
+      });
+      //this.showPopup("Success", "Account created.");
+      // this.nav.push('LoginPage');
+      console.log(this.myForm.value);
+      console.log(this.formdata);
   }
 
 }
@@ -139,9 +138,22 @@ showPopup(title, text) {
       {
         text: 'OK',
         handler: data => {
-          if (this.createSuccess) {
+           // this.nav.pop();
+        }
+      }
+    ]
+  });
+  alert.present();
+}
+showPopup1(title, text) {
+  let alert = this.alertCtrl.create({
+    title: title,
+    subTitle: text,
+    buttons: [
+      {
+        text: 'OK',
+        handler: data => {
             this.nav.pop();
-          }
         }
       }
     ]

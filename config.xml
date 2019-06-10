@@ -85,4 +85,9 @@
     <engine name="android" spec="7.1.4" />
     <plugin name="cordova-plugin-nativegeocoder" spec="3.2.1" />
     <plugin name="cordova-plugin-geolocation" spec="^5.0.0" />
+    <plugin name="cordova-plugin-email-composer" spec="0.9.2">
+        <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />
+    </plugin>
+    <plugin name="de.appplant.cordova.plugin.local-notification" spec="0.8.5" />
+    <plugin name="cordova-sqlite-storage" spec="3.2.0" />
 </widget>
